@@ -22,8 +22,8 @@ def matching(sentence):
     return calc_result
 
 def main():
-    print('Hello. If you give q-key to me, I finish.')
-    print('Available : +, -, *, /, sin(), con(), tan()')
+    message = 'Hello. If you give q-key to me, I finish.\nAvailable : +, -, *, /, sin(), con(), tan()\nNote : Don\'t include space!'
+    print(message)
     while True:
         sentence = input('>>')
 
