@@ -1,19 +1,28 @@
 import re
-import math
+from math import sin, cos, tan
 
 def math_func(part):
+    '''
+    evalの力に圧倒された過去の遺産
+    入力にsin(10)とかあったら数字だけ出して，計算する．
+    正規表現のところでうまく数字だけ取り出せない．ダメ
+    '''
     if 'sin' in part:
         a = re.search(r'\d+', part)
-        result = math.sin(int(a.group()))
+        result = sin(int(a.group()))
     elif 'cos' in part:
         a = re.search(r'\d+', part)
-        result = math.cos(int(a.group()))
+        result = cos(int(a.group()))
     elif 'tan' in part:
         a = re.search(r'\d+', part)
-        result = math.tan(int(a.group()))
+        result = tan(int(a.group()))
     return result
 
 def calc(part):
+    '''
+    math_func()と同様にevalに負けた遺産
+    単純な四則演算ができる．こちらは動く．
+    '''
     if '*' in part:
         a = part.split('*')
         result = int(a[0]) * int(a[1])
@@ -29,6 +38,13 @@ def calc(part):
     return result
 
 def matching(sentence):
+    '''
+    sentenceから任意のものにマッチングして，計算結果に置換する関数
+    置換していって数字以外のものにマッチングしなくなったら終了する．
+    三角関数から計算して，次に乗除算，最後に加減算をすることで，計算順序がうまくいくと思ってる．
+    長い式を入れると，だめかもしれない．
+    evalの存在に気づいてしまったので，きちんとデバッグしてないです．
+    '''
     while re.search(r'\D', sentence):
         if re.search(r'sin\(\d+\)|cos\(\d+\)|tan\(\d+\)', sentence):
             match_list = re.findall(r'sin\(\d+\)|cos\(\d+\)|tan\(\d+\)', sentence)
@@ -44,7 +60,7 @@ def matching(sentence):
     return sentence
 
 def main():
-    message = 'Hello. If you give q-key to me, I finish.\nAvailable : +, -, *, /, sin(), con(), tan()\nNote : Don\'t include space!'
+    message = 'Hello. If you give q-key to me, I finish.\nAvailable : +, -, *, /, %, sin(), con(), tan()\n'
     print(message)
 
     while True:
@@ -54,7 +70,10 @@ def main():
             print('Goodbye!!!')
             break
         
-        result = matching(sentence)
+        #sentenceから空白を抜く，matching()に入れるときに困るから書いていた
+        sentence = sentence.replace(' ', '')
+
+        result = eval(sentence)
         
         print(result)
 
