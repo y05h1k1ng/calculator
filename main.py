@@ -1,4 +1,4 @@
-from l import Parser
+from parse import Parser
 def main():
     print('Hello!')
 
@@ -6,6 +6,7 @@ def main():
         source = input('>>')
 
         if source == 'q':
+            print('Goodbye!')
             break
 
         source = source.replace(' ', '')

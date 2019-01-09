@@ -14,8 +14,14 @@ class OpAST(AST):
     def getValue(self):
         if self.op == '+':
             return self.args[0].getValue() + self.args[1].getValue()
+        elif self.op == '-':
+            return self.args[0].getValue() - self.args[1].getValue()
         elif self.op == '*':
             return self.args[0].getValue() * self.args[1].getValue()
+        elif self.op == '/':
+            return self.args[0].getValue() / self.args[1].getValue()
+        elif self.op == '%':
+            return self.args[0].getValue() % self.args[1].getValue()
         raise Exception('Error')
 
     def __str__(self):

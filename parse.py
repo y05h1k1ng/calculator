@@ -26,7 +26,7 @@ class Parser():
         return None
 
     def add(self):
-        n1 = self.mul()
+        n1 = self.sub()
         if self.isnext('+'):
             self.next()
             n2 = self.add()
@@ -35,13 +35,42 @@ class Parser():
         
         return n1
     
+    def sub(self):
+        n1 = self.mul()
+        if self.isnext('-'):
+            self.next()
+            n2 = self.sub()
+
+            return OpAST('-', [n1, n2])
+        
+        return n1
     def mul(self):
-        n1 = self.call()
+        n1 = self.div()
         if self.isnext('*'):
             self.next()
             n2 = self.mul()
 
             return OpAST('*', [n1, n2])
+        
+        return n1
+    
+    def div(self):
+        n1 = self.ddiv()
+        if self.isnext('/'):
+            self.next()
+            n2 = self.div()
+
+            return OpAST('/', [n1, n2])
+        
+        return n1
+    
+    def ddiv(self):
+        n1 = self.call()
+        if self.isnext('%'):
+            self.next()
+            n2 = self.ddiv()
+
+            return OpAST('%', [n1, n2])
         
         return n1
     
