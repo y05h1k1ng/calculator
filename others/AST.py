@@ -65,13 +65,15 @@ class CallAST(AST):
     
     def getValue(self):
         fn = self.call.getValue()
+        '''
         if fn == 'sin':
             return math.sin(self.arg.getValue())
         elif fn == 'cos':
             return math.cos(self.arg.getValue())
         elif fn == 'tan':
             return math.tan(self.arg.getValue())
-        elif fn == 'sqrt':
+        '''
+        if fn == 'sqrt':
             return math.sqrt(self.arg.getValue())
         elif fn == 'round':
             return round(self.arg.getValue())
