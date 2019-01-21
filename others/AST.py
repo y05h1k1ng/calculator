@@ -71,6 +71,10 @@ class CallAST(AST):
             return math.cos(self.arg.getValue())
         elif fn == 'tan':
             return math.tan(self.arg.getValue())
+        elif fn == 'sqrt':
+            return math.sqrt(self.arg.getValue())
+        elif fn == 'round':
+            return round(self.arg.getValue())
         raise Exception('Error')
     
     def __str__(self):

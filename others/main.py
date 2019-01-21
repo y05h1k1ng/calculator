@@ -4,12 +4,15 @@ def main():
 
     while True:
         source = input('>>')
-
+        source = source.replace(' ', '')
+        source = source.strip()
+        
         if source == 'q':
             print('Goodbye!')
             break
-
-        source = source.replace(' ', '')
+        elif len(source) == 0:
+            continue
+   
         ast = Parser(source).parse()
 
         print(ast.getValue())
